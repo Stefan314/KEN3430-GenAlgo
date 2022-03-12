@@ -9,5 +9,5 @@ class RandomSelection(SelectionType):
         super().__init__(name)
 
     def select(self, pop: list[Individual]) -> Individual:
-        # TODO: Implement this
+        # TODO: Implement
         pass

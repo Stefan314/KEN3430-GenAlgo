@@ -1,7 +1,6 @@
 from Individual import Individual
 
 
-# TODO: Implement more selection types
 class SelectionType:
     """
     Super class for all other selection types. E.g., TSP and knapsack.

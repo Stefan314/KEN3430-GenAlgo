@@ -1,7 +1,6 @@
 from Individual import Individual
 
 
-# TODO: Add more problems
 class Problem:
     """
     Super class for all other problems. E.g., TSP and knapsack.
