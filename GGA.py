@@ -1,7 +1,8 @@
 import random
 
-from GenomeTypes.GenRep import GenRep
 import Individual
+from GenomeTypes.BitString import BitString
+from GenomeTypes.Genome import Genome
 from Problem.Problem import Problem
 from Problem.TSP import TSP
 from Selection.RandomSelection import RandomSelection
@@ -13,9 +14,12 @@ class GGA:
     Generic Genetic Algorithm for solving any problem
     """
 
-    def __init__(self, pop_size: int = 1000, gen_count: int = 10,
-                 prob_co: float = 0.5, prob_mut: float = 0.1,
-                 gen_rep: GenRep = None,
+    def __init__(self,
+                 pop_size: int = 1000,
+                 gen_count: int = 10,
+                 prob_co: float = 0.5,
+                 prob_mut: float = 0.1,
+                 base_gen: Genome = None,
                  sel_type: SelectionType = None,
                  problem: Problem = None):
         """
@@ -26,7 +30,7 @@ class GGA:
         where 0 is 0% probability and 1 is 100%.
         :param prob_mut: Mutation probability. Must be a float between 0 (inclusive) and 1 (inclusive),
         where 0 is 0% probability and 1 is 100%
-        :param gen_rep: Genotype representation. How the genome is being represented.
+        :param base_gen: Genotype representation. How the genome is being represented.
         :param sel_type: The selection type. How survival is determined.
         :param problem: The problem. Defines how fitness is calculated for each individual.
         """
@@ -40,9 +44,9 @@ class GGA:
         self.prob_co = prob_co
         self.prob_mut = prob_mut
 
-        if not gen_rep:
-            gen_rep = GenRep.BITSTRING
-        self.gen_rep = gen_rep
+        if not base_gen:
+            base_gen = BitString()
+        self.base_gen = base_gen
 
         if not sel_type:
             sel_type = RandomSelection()
@@ -58,9 +62,7 @@ class GGA:
         :return: The individual with the highest fitness
         """
         # Initial population construction
-        population = []
-        for i in range(self.pop_size):
-            population.append(Individual.factory(self.gen_rep))
+        population = Individual.factory(self.base_gen, self.pop_size)
 
         self.fitness_full_pop(population)
 

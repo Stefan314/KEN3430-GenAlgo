@@ -15,3 +15,7 @@ class BitString(Genome):
     def mutate(self):
         # TODO: Implement
         pass
+
+    def new_genome(self) -> "Genome":
+        # TODO: Implement
+        pass
