@@ -1,5 +1,4 @@
 from Individual import Individual
-from Problem.Problem import Problem
 
 
 # TODO: Implement more selection types

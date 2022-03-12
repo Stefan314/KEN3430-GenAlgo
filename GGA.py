@@ -1,8 +1,7 @@
 import random
 
-from GR.BitString import BitString
-from GR.GenotypeRepresentation import GenotypeRepresentation
-from Individual import Individual
+from GenomeTypes.GenRep import GenRep
+import Individual
 from Problem.Problem import Problem
 from Problem.TSP import TSP
 from Selection.RandomSelection import RandomSelection
@@ -16,7 +15,7 @@ class GGA:
 
     def __init__(self, pop_size: int = 1000, gen_count: int = 10,
                  prob_co: float = 0.5, prob_mut: float = 0.1,
-                 gen_rep: GenotypeRepresentation = None,
+                 gen_rep: GenRep = None,
                  sel_type: SelectionType = None,
                  problem: Problem = None):
         """
@@ -41,19 +40,19 @@ class GGA:
         self.prob_co = prob_co
         self.prob_mut = prob_mut
 
-        if gen_rep is None:
-            gen_rep = BitString()
+        if not gen_rep:
+            gen_rep = GenRep.BITSTRING
         self.gen_rep = gen_rep
 
-        if sel_type is None:
+        if not sel_type:
             sel_type = RandomSelection()
         self.sel_type = sel_type
 
-        if problem is None:
+        if not problem:
             problem = TSP()
         self.problem = problem
 
-    def run(self) -> Individual:
+    def run(self) -> Individual.Individual:
         """
         Runs the GA to find the best individual
         :return: The individual with the highest fitness
@@ -61,7 +60,7 @@ class GGA:
         # Initial population construction
         population = []
         for i in range(self.pop_size):
-            population.append(Individual())
+            population.append(Individual.factory(self.gen_rep))
 
         self.fitness_full_pop(population)
 
@@ -83,13 +82,17 @@ class GGA:
                 parent2 = mating_pool[random.randrange(0, len(mating_pool))]
                 mating_pool.remove(parent2)
 
-                parents = [parent1, parent2]
+                children = [parent1, parent2]
 
                 # If crossover doesn't happen, the children will be the same as the parents.
-                children = self.gen_rep.crossover(parents, self.prob_co)
+                if random.random() < self.prob_co:
+                    # Crossover alters the genomes of the parents, so they can be turned into children.
+                    parent1.genome.crossover(parent2.genome)
 
                 for child in children:
-                    self.gen_rep.mutate(child.genome, self.prob_mut)
+                    if random.random() < self.prob_mut:
+                        # Mutation alters the genome of the child
+                        child.genome.mutate()
                     population.append(child)
             self.fitness_full_pop(population)
         best_ind = population[0]
