@@ -21,10 +21,12 @@ class Genome:
         """
         pass
 
-    def mutate(self):
+    def mutate(self, prob_mut: float):
         """
         Performs mutation on the current genome. Will change the current genome.
         Should be overwritten by inheriting classes.
+        :param prob_mut: Mutation probability. Is used to mutate each gene with this probability.
+        Must be a float between 0 (inclusive) and 1 (inclusive), where 0 is 0% probability and 1 is 100%.
         :return: None
         """
         pass
