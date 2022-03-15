@@ -14,7 +14,9 @@ def main():
               base_gen=base_gen,
               sel_type=sel_type,
               problem=problem)
-    gga.run()
+    best_ind = gga.run()
+    # TODO: do sth with best_ind, idk
+    pass
 
 
 if __name__ == '__main__':
