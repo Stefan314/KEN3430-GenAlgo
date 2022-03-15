@@ -18,11 +18,11 @@ class RWS(Selection):
         super().__init__(SelectionType.RWS)
         self.temp = temp
 
-    def select(self, pop: List[Individual]) -> Individual:
-        max_Fitness = sum([c.fitness for c in pop])
-        required_chance = random.uniform(0, max_Fitness)
+    def select(self, pop: list[Individual]) -> Individual:
+        max_fitness = sum([c.fitness for c in pop])
+        required_chance = random.uniform(0, max_fitness)
         current_chance = 0
-        for Individual in pop:
-            current_chance += Individual.fitness
+        for individual in pop:
+            current_chance += individual.fitness
             if current_chance > required_chance:
-                return Individual
+                return individual

@@ -10,7 +10,7 @@ class RandomSelection(Selection):
     def __init__(self):
         super().__init__(SelectionType.RWS)
 
-    def select(self, pop: List[Individual]) -> Individual:
+    def select(self, pop: list[Individual]) -> Individual:
 
         # we take random Individuals, for a total of half the population. Repetitions are allowed.
         # n = pop.len/2

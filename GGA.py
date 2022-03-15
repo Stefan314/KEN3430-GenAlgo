@@ -11,6 +11,7 @@ from Selection.RandomSelection import RandomSelection
 from Selection.Selection import Selection
 from Problem.Knapsack import Knapsack
 
+
 class GGA:
     """
     Generic Genetic Algorithm for solving any problem
@@ -58,11 +59,6 @@ class GGA:
             problem = TSP()
         self.problem = problem
 
-
-
-
-
-
     def run(self) -> Individual.Individual:
         """
         Runs the GA to find the best individual
@@ -77,13 +73,14 @@ class GGA:
         # Initial population construction
         population = Individual.factory(self.base_gen, self.pop_size)
         if self.problem == Knapsack():
-            self.fitness_full_pop_Knapsack(population, max_weight, item_weights, item_values)
+            self.fitness_full_pop_knapsack(population, max_weight, item_weights, item_values)
         else:
             self.fitness_full_pop_TSP(population)
 
         # Main GA
         counter = 0
         while counter < self.max_generations:
+            counter += 1
             # Fill mating pool
             mating_pool = []
             while len(mating_pool) != len(population):
@@ -111,7 +108,7 @@ class GGA:
                     child.genome.mutate(self.prob_mut)
                     population.append(child)
             if self.problem == Knapsack():
-                self.fitness_full_pop_Knapsack(population, max_weight, item_weights, item_values)
+                self.fitness_full_pop_knapsack(population, max_weight, item_weights, item_values)
             else:
                 self.fitness_full_pop_TSP(population)
         best_ind = population[0]
@@ -120,10 +117,10 @@ class GGA:
                 best_ind = ind
         return best_ind
 
-    def fitness_full_pop_Knapsack(self, pop: List[Individual], max_weight, item_weights, item_values):
+    def fitness_full_pop_knapsack(self, pop: list[Individual], max_weight, item_weights, item_values):
         for ind in pop:
             self.problem.fitness(ind, max_weight, item_weights, item_values)
 
-    def fitness_full_pop_TSP(self, pop: List[Individual]):
+    def fitness_full_pop_TSP(self, pop: list[Individual]):
         for ind in pop:
             self.problem.fitness(ind)

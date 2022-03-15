@@ -51,7 +51,7 @@ class BitString(Genome):
             self.bitstring[i] = (bit_bool and not mut) or (not bit_bool and mut)
 
     def new_genome(self) -> "Genome":
-        return self.__init__(len(self), self.max_co)
+        return BitString(len(self), self.max_co)
 
     def __len__(self):
         return len(self.bitstring)

@@ -12,6 +12,9 @@ class Individual:
         self.genome = genome
         self.fitness = 0
 
+    def __str__(self):
+        return "Genome:\n" + str(self.genome) + "\nFitness = " + str(self.fitness)
+
 
 def factory(base_gen: Genome, no_of_inds: int = 1) -> List[Individual]:
     """

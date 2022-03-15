@@ -17,7 +17,7 @@ class Selection:
         """
         self.sel_type = sel_type
 
-    def select(self, pop: List[Individual]) -> Individual:
+    def select(self, pop: list[Individual]) -> Individual:
         """
         Selects an individual, possibly based on their fitness.
         :param pop: The population where individuals can be picked from.
