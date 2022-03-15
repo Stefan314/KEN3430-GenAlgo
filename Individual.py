@@ -1,3 +1,5 @@
+from typing import List
+
 from GenomeTypes.Genome import Genome
 
 
@@ -11,7 +13,7 @@ class Individual:
         self.fitness = 0
 
 
-def factory(base_gen: Genome, no_of_inds: int = 1) -> list[Individual]:
+def factory(base_gen: Genome, no_of_inds: int = 1) -> List[Individual]:
     """
     Creates new individuals with new genomes and a fitness set to 0
     :param base_gen: The base genome,

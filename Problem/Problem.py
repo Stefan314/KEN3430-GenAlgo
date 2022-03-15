@@ -1,4 +1,5 @@
 from Individual import Individual
+from Problem.ProblemName import ProblemName
 
 
 class Problem:
@@ -6,7 +7,7 @@ class Problem:
     Super class for all other problems. E.g., TSP and knapsack.
     """
 
-    def __init__(self, name: str):
+    def __init__(self, name: ProblemName):
         """
         Inheriting classes should tell the super class what kind of problem they are.
         :param name: A string. This makes it easier to see what kind of problem is being handled.

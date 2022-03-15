@@ -1,10 +1,11 @@
+from typing import List
+
 from Individual import Individual
+from Selection.Selection import Selection
 from Selection.SelectionType import SelectionType
 
-name = "Random"
 
-
-class RWS(SelectionType):
+class RWS(Selection):
     """
     Roulette wheel selection
     """
@@ -14,9 +15,9 @@ class RWS(SelectionType):
         :param temp: Temperature parameter for tuning of the roulette-wheel.
         Low temperature means more randomness, high temperature means more deterministic based on fitness value.
         """
-        super().__init__(name)
+        super().__init__(SelectionType.RWS)
         self.temp = temp
 
-    def select(self, pop: list[Individual]) -> Individual:
+    def select(self, pop: List[Individual]) -> Individual:
         # TODO: Implement
         pass
