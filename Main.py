@@ -2,20 +2,19 @@ from GGA import GGA
 
 
 def main():
+    # Change these to whatever is best for your problem
+    pop_sz = 2000
+    max_gens = 100
+    pr_co = 0.6
+    pr_mt = 0.15
     # TODO: Fill these 3 in
     base_gen = None
     sel_type = None
     problem = None
-    # TODO: Change first 4
-    gga = GGA(pop_size=2000,
-              max_generations=100,
-              prob_co=0.6,
-              prob_mut=0.15,
-              base_gen=base_gen,
-              sel_type=sel_type,
-              problem=problem)
+
+    gga = GGA(pop_sz, max_gens, pr_co, pr_mt, base_gen, sel_type, problem)
     best_ind = gga.run()
-    # TODO: do sth with best_ind, idk
+    # Let the best individual do something. Like running your problem and printing out the solution to your problem
     pass
 
 
