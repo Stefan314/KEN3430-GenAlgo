@@ -1,12 +1,14 @@
 import random
 
+from typing import List
+
 import Individual
 from GenomeTypes.BitString import BitString
 from GenomeTypes.Genome import Genome
 from Problem.Problem import Problem
 from Problem.TSP import TSP
 from Selection.RandomSelection import RandomSelection
-from Selection.SelectionType import SelectionType
+from Selection.Selection import Selection
 
 
 class GGA:
@@ -20,7 +22,7 @@ class GGA:
                  prob_co: float = 0.5,
                  prob_mut: float = 0.1,
                  base_gen: Genome = None,
-                 sel_type: SelectionType = None,
+                 sel_type: Selection = None,
                  problem: Problem = None):
         """
         Constructor to set up some basic properties for the GA
@@ -92,9 +94,8 @@ class GGA:
                     parent1.genome.crossover(parent2.genome)
 
                 for child in children:
-                    if random.random() < self.prob_mut:
-                        # Mutation alters the genome of the child
-                        child.genome.mutate()
+                    # Mutation alters the genome of the child
+                    child.genome.mutate(self.prob_mut)
                     population.append(child)
             self.fitness_full_pop(population)
         best_ind = population[0]
@@ -103,6 +104,6 @@ class GGA:
                 best_ind = ind
         return best_ind
 
-    def fitness_full_pop(self, pop: list[Individual]):
+    def fitness_full_pop(self, pop: List[Individual]):
         for ind in pop:
             self.problem.fitness(ind)

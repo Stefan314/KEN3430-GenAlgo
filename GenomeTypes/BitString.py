@@ -1,5 +1,7 @@
 import random
 
+from typing import List
+
 from GenomeTypes.GenRep import GenRep
 from GenomeTypes.Genome import Genome
 
@@ -10,7 +12,7 @@ prop_0 = 0.5
 class BitString(Genome):
 
     # The possible crossover points (all indices of the bitstring plus one)
-    possible_co_pts: list[int]
+    possible_co_pts: List[int]
 
     def __init__(self, length: int = 10, max_co: int = 9):
         """
