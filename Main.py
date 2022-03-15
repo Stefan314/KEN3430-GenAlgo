@@ -14,6 +14,7 @@ def main():
               base_gen=base_gen,
               sel_type=sel_type,
               problem=problem)
+    gga.run()
 
 
 if __name__ == '__main__':
