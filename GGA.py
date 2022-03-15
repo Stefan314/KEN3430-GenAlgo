@@ -18,7 +18,7 @@ class GGA:
 
     def __init__(self,
                  pop_size: int = 1000,
-                 gen_count: int = 10,
+                 max_generations: int = 10,
                  prob_co: float = 0.5,
                  prob_mut: float = 0.1,
                  base_gen: Genome = None,
@@ -27,7 +27,7 @@ class GGA:
         """
         Constructor to set up some basic properties for the GA
         :param pop_size: Population size. Must be a positive integer.
-        :param gen_count: Number of generations. Must be a positive integer.
+        :param max_generations: Number of generations. Must be a positive integer.
         :param prob_co: Crossover probability. Must be a float between 0 (inclusive) and 1 (inclusive),
         where 0 is 0% probability and 1 is 100%.
         :param prob_mut: Mutation probability. Must be a float between 0 (inclusive) and 1 (inclusive),
@@ -37,12 +37,12 @@ class GGA:
         :param problem: The problem. Defines how fitness is calculated for each individual.
         """
         assert pop_size > 0
-        assert gen_count > 0
+        assert max_generations > 0
         assert 0 <= prob_co <= 1
         assert 0 <= prob_mut <= 1
 
         self.pop_size = pop_size
-        self.gen_count = gen_count
+        self.max_generations = max_generations
         self.prob_co = prob_co
         self.prob_mut = prob_mut
 
@@ -70,7 +70,7 @@ class GGA:
 
         # Main GA
         counter = 0
-        while counter < self.gen_count:
+        while counter < self.max_generations:
             # Fill mating pool
             mating_pool = []
             while len(mating_pool) != len(population):

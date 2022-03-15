@@ -21,4 +21,3 @@ class RandomSelection(Selection):
         #     new_pop.append(pop[random_selection])
         random_selection = random.randrange(len(pop))
         return pop[random_selection]
-        pass

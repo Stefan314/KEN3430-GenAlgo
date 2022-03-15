@@ -32,6 +32,7 @@ class BitString(Genome):
         self.possible_co_pts.append(length)
 
     def crossover(self, other_gen: "BitString"):
+        # TODO: add comments
         random.shuffle(self.possible_co_pts)
         co_pts = self.possible_co_pts[0:self.max_co]
         switch = False
@@ -50,7 +51,7 @@ class BitString(Genome):
             self.bitstring[i] = (bit_bool and not mut) or (not bit_bool and mut)
 
     def new_genome(self) -> "Genome":
-        return self.__init__(len(self))
+        return self.__init__(len(self), self.max_co)
 
     def __len__(self):
         return len(self.bitstring)

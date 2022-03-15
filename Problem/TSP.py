@@ -4,6 +4,7 @@ from Problem.ProblemName import ProblemName
 
 
 class TSP(Problem):
+
     def __init__(self):
         super().__init__(ProblemName.TSP)
 
