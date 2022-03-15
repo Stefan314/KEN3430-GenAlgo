@@ -8,7 +8,7 @@ class Knapsack(Problem):
     def __init__(self):
         super().__init__(ProblemName.KNAPSACK)
 
-    def fitness(self, ind: Individual):
+    def fitness(self, ind: Individual, max_weight, item_weights, item_values):
         fitness = 0
         total_weight = 0
         for i in range(self.n):
