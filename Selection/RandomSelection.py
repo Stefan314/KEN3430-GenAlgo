@@ -11,13 +11,14 @@ class RandomSelection(Selection):
         super().__init__(SelectionType.RWS)
 
     def select(self, pop: List[Individual]) -> Individual:
-        # TODO: Implement
-        # we take random Individuals, for a total of half the population. Repetitions are allowed.
-        n = pop.len/2
-        random.shuffle(pop)
-        new_pop = list[Individual]
-        for i in n:
-            random_selection = random.randrange(len(pop))
-            new_pop.append(pop[random_selection])
 
+        # we take random Individuals, for a total of half the population. Repetitions are allowed.
+        # n = pop.len/2
+        # random.shuffle(pop)
+        # new_pop = list[Individual]
+        # for i in n:
+        #     random_selection = random.randrange(len(pop))
+        #     new_pop.append(pop[random_selection])
+        random_selection = random.randrange(len(pop))
+        return pop[random_selection]
         pass
