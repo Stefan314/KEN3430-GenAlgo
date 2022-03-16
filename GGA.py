@@ -1,7 +1,5 @@
 import random
 
-from typing import List
-
 import Individual
 from GenomeTypes.BitString import BitString
 from GenomeTypes.Genome import Genome
@@ -9,7 +7,6 @@ from Problem.Problem import Problem
 from Problem.TSP import TSP
 from Selection.RandomSelection import RandomSelection
 from Selection.Selection import Selection
-from Problem.Knapsack import Knapsack
 
 
 class GGA:
@@ -107,6 +104,6 @@ class GGA:
                 best_ind = ind
         return best_ind
 
-    def fitness_full_pop(self, pop: list[Individual]):
+    def fitness_full_pop(self, pop):
         for ind in pop:
             self.problem.fitness(ind)

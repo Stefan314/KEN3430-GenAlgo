@@ -1,5 +1,3 @@
-from typing import List
-
 from Individual import Individual
 from Selection.SelectionType import SelectionType
 
@@ -17,7 +15,7 @@ class Selection:
         """
         self.sel_type = sel_type
 
-    def select(self, pop: list[Individual]) -> Individual:
+    def select(self, pop) -> Individual:
         """
         Selects an individual, possibly based on their fitness.
         :param pop: The population where individuals can be picked from.
