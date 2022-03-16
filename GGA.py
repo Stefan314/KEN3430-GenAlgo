@@ -64,18 +64,11 @@ class GGA:
         Runs the GA to find the best individual
         :return: The individual with the highest fitness
         """
-        if self.problem == Knapsack():
-            n = len(Genome)
-            max_weight = 10
-            item_values = [i for i in range(1, n+1)]
-            item_weights = [random.randint(1, n) for i in range(0, n)]
 
         # Initial population construction
         population = Individual.factory(self.base_gen, self.pop_size)
-        if self.problem == Knapsack():
-            self.fitness_full_pop_knapsack(population, max_weight, item_weights, item_values)
-        else:
-            self.fitness_full_pop_TSP(population)
+
+        self.fitness_full_pop(population)
 
         # Main GA
         counter = 0
@@ -107,20 +100,13 @@ class GGA:
                     # Mutation alters the genome of the child
                     child.genome.mutate(self.prob_mut)
                     population.append(child)
-            if self.problem == Knapsack():
-                self.fitness_full_pop_knapsack(population, max_weight, item_weights, item_values)
-            else:
-                self.fitness_full_pop_TSP(population)
+            self.fitness_full_pop(population)
         best_ind = population[0]
         for ind in population:
             if ind.fitness > best_ind.fitness:
                 best_ind = ind
         return best_ind
 
-    def fitness_full_pop_knapsack(self, pop: list[Individual], max_weight, item_weights, item_values):
-        for ind in pop:
-            self.problem.fitness(ind, max_weight, item_weights, item_values)
-
-    def fitness_full_pop_TSP(self, pop: list[Individual]):
+    def fitness_full_pop(self, pop: list[Individual]):
         for ind in pop:
             self.problem.fitness(ind)
