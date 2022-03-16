@@ -55,3 +55,6 @@ class BitString(Genome):
 
     def __len__(self):
         return len(self.bitstring)
+
+    def __getitem__(self, item):
+        return self.bitstring[item]

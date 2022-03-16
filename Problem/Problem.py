@@ -22,3 +22,12 @@ class Problem:
         :return: None
         """
         pass
+
+    def run(self, ind: Individual, print_sol: bool = False):
+        """
+        Runs the problem and possibly prints the solution
+        :param ind: The individual that runs the problem
+        :param print_sol: Prints the solution
+        :return: None
+        """
+        pass

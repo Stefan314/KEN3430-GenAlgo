@@ -39,3 +39,9 @@ class Genome:
         :return: A new genome based on the current one.
         """
         pass
+
+    def __getitem__(self, item):
+        """
+        If this class is inherited, and this method is implemented in this subclass than it will return sth useful
+        """
+        pass
