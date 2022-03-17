@@ -8,3 +8,4 @@ __pycache__/Individual.cpython-38.pyc
 GenomeTypes/__pycache__/BitString.cpython-38.pyc
 Selection/__pycache__/RandomSelection.cpython-38.pyc
 Selection/__pycache__/Selection.cpython-38.pyc
+*.pyc
