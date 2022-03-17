@@ -4,6 +4,7 @@ from GGA import GGA
 from GenomeTypes.IntString import IntString
 from Problem.TSP import TSP
 from Selection.RWS import RWS
+from Selection.RandomSelection import RandomSelection
 
 
 def main_tsp():
