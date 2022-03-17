@@ -18,6 +18,7 @@ class RWS(Selection):
         self.temp = temp
 
     def select(self, pop):
+        # Sort the population based on fitness
         max_fitness = sum([c.fitness for c in pop])
         new_pop = []
         for i in range(len(pop)):

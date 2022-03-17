@@ -44,18 +44,21 @@ class TSP(Problem):
                 ind.fitness = 1 / path_length
                 break
         if print_sol:
-            # Printing the path
-            sol = "Solution:\n"
-            for i in range(1, len(visited_nodes)):
-                prev_node = visited_nodes[i - 1]
-                node = visited_nodes[i]
+            if ind.fitness != 0:
+                # Printing the path
+                sol = "Solution:\n"
+                for i in range(1, len(visited_nodes)):
+                    prev_node = visited_nodes[i - 1]
+                    node = visited_nodes[i]
+                    edge_weight = self.graph.get_edge_data(prev_node, node)["weight"]
+                    sol += str(prev_node) + " -> " + str(node) + " Weight: " + str(edge_weight) + "\n"
+
+                prev_node = visited_nodes[-1]
+                node = visited_nodes[0]
                 edge_weight = self.graph.get_edge_data(prev_node, node)["weight"]
                 sol += str(prev_node) + " -> " + str(node) + " Weight: " + str(edge_weight) + "\n"
 
-            prev_node = visited_nodes[-1]
-            node = visited_nodes[0]
-            edge_weight = self.graph.get_edge_data(prev_node, node)["weight"]
-            sol += str(prev_node) + " -> " + str(node) + " Weight: " + str(edge_weight) + "\n"
-
-            sol += "Total cost: " + str(path_length)
-            print(sol)
+                sol += "Total cost: " + str(path_length)
+                print(sol)
+            else:
+                print("No solution was found")
