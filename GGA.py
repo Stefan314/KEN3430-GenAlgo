@@ -71,6 +71,7 @@ class GGA:
         counter = 0
         while counter < self.max_generations:
             counter += 1
+            print("Generation: " + str(counter))
             # Fill mating pool
             mating_pool = []
             while len(mating_pool) != len(population):

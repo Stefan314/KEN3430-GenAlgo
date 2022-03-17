@@ -40,6 +40,12 @@ class Genome:
         """
         pass
 
+    def __len__(self):
+        """
+        If this class is inherited, and this method is implemented in this subclass than it will return sth useful
+        """
+        pass
+
     def __getitem__(self, item):
         """
         If this class is inherited, and this method is implemented in this subclass than it will return sth useful

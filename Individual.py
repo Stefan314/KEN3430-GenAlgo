@@ -10,7 +10,7 @@ class Individual:
 
     def __init__(self, genome: Genome):
         self.genome = genome
-        self.fitness = 0
+        self.fitness = 0.0
 
     def __str__(self):
         return "Genome:\n" + str(self.genome) + "\nFitness = " + str(self.fitness)

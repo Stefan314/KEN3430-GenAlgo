@@ -1,9 +1,9 @@
-from typing import List
+import random
 
 from Individual import Individual
 from Selection.Selection import Selection
 from Selection.SelectionType import SelectionType
-import random
+
 
 class RWS(Selection):
     """
@@ -18,7 +18,7 @@ class RWS(Selection):
         super().__init__(SelectionType.RWS)
         self.temp = temp
 
-    def select(self, pop: list[Individual]) -> Individual:
+    def select(self, pop) -> Individual:
         max_fitness = sum([c.fitness for c in pop])
         required_chance = random.uniform(0, max_fitness)
         current_chance = 0
