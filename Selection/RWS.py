@@ -19,9 +19,12 @@ class RWS(Selection):
 
     def select(self, pop):
         max_fitness = sum([c.fitness for c in pop])
-        required_chance = random.uniform(0, max_fitness)
-        current_chance = 0
-        for individual in pop:
-            current_chance += individual.fitness
-            if current_chance > required_chance:
-                return individual
+        new_pop = []
+        for i in range(len(pop)):
+            required_chance = random.uniform(0, max_fitness)
+            current_chance = 0
+            for individual in pop:
+                current_chance += individual.fitness
+                if current_chance > required_chance:
+                    new_pop.append(individual)
+        return new_pop

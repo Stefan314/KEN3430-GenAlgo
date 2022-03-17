@@ -10,12 +10,12 @@ class RandomSelection(Selection):
 
     def select(self, pop):
 
-        # we take random Individuals, for a total of half the population. Repetitions are allowed.
-        # n = pop.len/2
-        # random.shuffle(pop)
-        # new_pop = list[Individual]
-        # for i in n:
-        #     random_selection = random.randrange(len(pop))
-        #     new_pop.append(pop[random_selection])
-        random_selection = random.randrange(len(pop))
-        return pop[random_selection]
+        #we take random Individuals, Repetitions are allowed.
+        n = pop.len
+        random.shuffle(pop)
+        new_pop = []
+        for i in n:
+             random_selection = random.randrange(len(pop))
+             new_pop.append(pop[random_selection])
+
+        return new_pop
