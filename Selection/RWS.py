@@ -27,4 +27,5 @@ class RWS(Selection):
                 current_chance += individual.fitness
                 if current_chance > required_chance:
                     new_pop.append(individual)
+                    break
         return new_pop

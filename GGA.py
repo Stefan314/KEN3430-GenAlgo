@@ -79,39 +79,32 @@ class GGA:
             counter += 1
             print("Generation: " + str(counter))
             # Fill mating pool
+            fitness_scores = []
+            for ind in population:
+                if ind.fitness not in fitness_scores:
+                    fitness_scores.append(ind.fitness)
+            print(fitness_scores)
             mating_pool = self.sel_type.select(population)
 
             # Generate new population from mating pool
             population = []
             while len(mating_pool) != 0:
                 # Select random individuals from mating pool and remove them from the pool
-                parent1 = mating_pool[random.randrange(0, len(mating_pool))]
+                parent1 = mating_pool[random.randrange(len(mating_pool))]
                 mating_pool.remove(parent1)
-                parent2 = mating_pool[random.randrange(0, len(mating_pool))]
+                parent2 = mating_pool[random.randrange(len(mating_pool))]
                 mating_pool.remove(parent2)
 
                 children = [parent1, parent2]
 
                 # If crossover doesn't happen, the children will be the same as the parents.
                 if random.random() < self.prob_co:
-                    try:
-                        # Crossover alters the genomes of the parents, so they can be turned into children.
-                        parent1.genome.crossover(parent2.genome)
-                    except AttributeError:
-                        print(population)
-                        print(mating_pool)
-                        print(children)
-                        raise AttributeError("shucks")
+                    # Crossover alters the genomes of the parents, so they can be turned into children.
+                    parent1.genome.crossover(parent2.genome)
 
                 for child in children:
-                    try:
-                        # Mutation alters the genome of the child
-                        child.genome.mutate(self.prob_mut)
-                    except AttributeError:
-                        print(population)
-                        print(mating_pool)
-                        print(children)
-                        raise AttributeError("shucks")
+                    # Mutation alters the genome of the child
+                    child.genome.mutate(self.prob_mut)
                     if not child:
                         print("child: " + str(child))
                     population.append(child)

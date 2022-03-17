@@ -4,7 +4,6 @@ from GGA import GGA
 from GenomeTypes.IntString import IntString
 from Problem.TSP import TSP
 from Selection.RWS import RWS
-from Selection.RandomSelection import RandomSelection
 
 
 def main_tsp():
@@ -19,7 +18,7 @@ def main_tsp():
     # This should be the longest possible route
     length = sum(range(len(graph.nodes))) + len(graph.nodes) - 1
     base_gen = IntString(length=length, max_co=length - 1, max_int=3)
-    sel_type = RandomSelection()
+    sel_type = RWS()
 
     gga = GGA(pop_sz, max_gens, pr_co, pr_mt, base_gen, sel_type, problem)
     best_ind = gga.run()
@@ -70,4 +69,5 @@ def main_knap():
 
 
 if __name__ == '__main__':
+    # Change to main_knap() or main_tsp() depending on what you want to test
     main_tsp()
