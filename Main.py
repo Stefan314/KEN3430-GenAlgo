@@ -1,6 +1,7 @@
 import networkx as nx
 
 from GGA import GGA
+from GenomeTypes.BitString import BitString
 from GenomeTypes.IntString import IntString
 from Problem.TSP import TSP
 from Selection.RWS import RWS
@@ -60,6 +61,7 @@ def main_knap():
     # This should be the longest possible route
     length = no_of_nodes**sum(range(no_of_nodes))
     base_gen = IntString(length=length, max_co=length - 1, max_int=3)
+    base_gen = BitString(length=5, max_co=4)
     sel_type = RWS(temp=1.0)
 
     gga = GGA(pop_sz, max_gens, pr_co, pr_mt, base_gen, sel_type, problem)
