@@ -9,7 +9,7 @@ from Selection.RandomSelection import RandomSelection
 from Selection.Selection import Selection
 
 
-CONVERGENCE = 2
+CONVERGENCE = 3
 
 
 class GGA:
@@ -127,8 +127,8 @@ class GGA:
                 no_change_counter += 1
             else:
                 no_change_counter = 0
-            # If there were no changes in fitness for over CONVERGENCE generations, then this problem has converged.
-            if no_change_counter > CONVERGENCE:
+            # If there were no changes in fitness for CONVERGENCE generations, then this problem has converged.
+            if no_change_counter == CONVERGENCE:
                 return best_ind
             prev_best_ind_fitness = best_ind.fitness
         return best_ind
