@@ -4,6 +4,7 @@ from GGA import GGA
 from GenomeTypes.IntString import IntString
 from Problem.TSP import TSP
 from Selection.RWS import RWS
+from Selection.RandomSelection import RandomSelection
 
 
 def main_tsp():
@@ -16,14 +17,16 @@ def main_tsp():
     problem = TSP(start_node=0, graph=graph)
 
     # This should be the longest possible route
-    length = sum(range(len(graph.nodes)))
+    length = sum(range(len(graph.nodes))) + len(graph.nodes) - 1
     base_gen = IntString(length=length, max_co=length - 1, max_int=3)
-    sel_type = RWS(temp=1.0)
+    sel_type = RandomSelection()
 
     gga = GGA(pop_sz, max_gens, pr_co, pr_mt, base_gen, sel_type, problem)
     best_ind = gga.run()
     # Let the best individual do something. Like running your problem and printing out the solution to your problem
     print(best_ind)
+    # Printing the solution
+    problem.fitness(best_ind, True)
 
 
 def tsp_graph():
@@ -63,6 +66,7 @@ def main_knap():
     best_ind = gga.run()
     # Let the best individual do something. Like running your problem and printing out the solution to your problem
     print(best_ind)
+
 
 if __name__ == '__main__':
     main_tsp()

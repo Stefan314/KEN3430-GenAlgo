@@ -14,20 +14,12 @@ class Problem:
         """
         self.name = name
 
-    def fitness(self, ind: Individual):
+    def fitness(self, ind: Individual, print_sol: bool = False):
         """
         Calculates the fitness of the given individual based on their genome.
         The fitness value of the individual will be changed.
         :param ind: The individual that we need to calculate the fitness for
-        :return: None
-        """
-        pass
-
-    def run(self, ind: Individual, print_sol: bool = False):
-        """
-        Runs the problem and possibly prints the solution
-        :param ind: The individual that runs the problem
-        :param print_sol: Prints the solution
+        :param print_sol: If True, prints the solution
         :return: None
         """
         pass

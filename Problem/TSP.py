@@ -14,13 +14,11 @@ class TSP(Problem):
             start_node = 0
         self.start_node = start_node
 
-    def fitness(self, ind: Individual):
-        # If the fitness is not 0, then this individual already had its fitness being calculated
-        if ind.fitness != 0:
-            return
+    def fitness(self, ind: Individual, print_sol: bool = False):
         current_node = self.start_node
         visited_nodes = [current_node]
         path_length = 0
+        ind.fitness = 0
         # Loop over genome
         # End if all genes have been read or if all nodes have been visited
         for i in range(len(ind.genome)):
@@ -39,9 +37,25 @@ class TSP(Problem):
             if next_node not in visited_nodes:
                 visited_nodes.append(next_node)
             # Check if all nodes have been visited
-            if len(visited_nodes) == len(self.graph.nodes):
+            if len(visited_nodes) == len(self.graph.nodes) and current_node == self.start_node:
                 # Assign correct fitness to individual based on the path length.
                 # Shorter path length means higher fitness.
                 # So a 1/x formula is used, since path length shouldn't be negative.
                 ind.fitness = 1 / path_length
                 break
+        if print_sol:
+            # Printing the path
+            sol = "Solution:\n"
+            for i in range(1, len(visited_nodes)):
+                prev_node = visited_nodes[i - 1]
+                node = visited_nodes[i]
+                edge_weight = self.graph.get_edge_data(prev_node, node)["weight"]
+                sol += str(prev_node) + " -> " + str(node) + " Weight: " + str(edge_weight) + "\n"
+
+            prev_node = visited_nodes[-1]
+            node = visited_nodes[0]
+            edge_weight = self.graph.get_edge_data(prev_node, node)["weight"]
+            sol += str(prev_node) + " -> " + str(node) + " Weight: " + str(edge_weight) + "\n"
+
+            sol += "Total cost: " + str(path_length)
+            print(sol)

@@ -9,6 +9,9 @@ from Selection.RandomSelection import RandomSelection
 from Selection.Selection import Selection
 
 
+CONVERGENCE = 2
+
+
 class GGA:
     """
     Generic Genetic Algorithm for solving any problem
@@ -69,6 +72,9 @@ class GGA:
 
         # Main GA
         counter = 0
+        no_change_counter = 0
+        prev_best_ind_fitness = 0
+        best_ind = None
         while counter < self.max_generations:
             counter += 1
             print("Generation: " + str(counter))
@@ -91,18 +97,40 @@ class GGA:
 
                 # If crossover doesn't happen, the children will be the same as the parents.
                 if random.random() < self.prob_co:
-                    # Crossover alters the genomes of the parents, so they can be turned into children.
-                    parent1.genome.crossover(parent2.genome)
+                    try:
+                        # Crossover alters the genomes of the parents, so they can be turned into children.
+                        parent1.genome.crossover(parent2.genome)
+                    except AttributeError:
+                        print(population)
+                        print(mating_pool)
+                        print(children)
+                        raise AttributeError("shucks")
 
                 for child in children:
-                    # Mutation alters the genome of the child
-                    child.genome.mutate(self.prob_mut)
+                    try:
+                        # Mutation alters the genome of the child
+                        child.genome.mutate(self.prob_mut)
+                    except AttributeError:
+                        print(population)
+                        print(mating_pool)
+                        print(children)
+                        raise AttributeError("shucks")
+                    if not child:
+                        print("child: " + str(child))
                     population.append(child)
             self.fitness_full_pop(population)
-        best_ind = population[0]
-        for ind in population:
-            if ind.fitness > best_ind.fitness:
-                best_ind = ind
+            best_ind = population[0]
+            for ind in population:
+                if ind.fitness > best_ind.fitness:
+                    best_ind = ind
+            if prev_best_ind_fitness == best_ind.fitness:
+                no_change_counter += 1
+            else:
+                no_change_counter = 0
+            # If there were no changes in fitness for over CONVERGENCE generations, then this problem has converged.
+            if no_change_counter > CONVERGENCE:
+                return best_ind
+            prev_best_ind_fitness = best_ind.fitness
         return best_ind
 
     def fitness_full_pop(self, pop):

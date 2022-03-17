@@ -15,7 +15,7 @@ class Knapsack(Problem):
         self.item_values = [i for i in range(1, self.n + 1)]
         self.item_weights = [random.randint(1, self.n) for i in range(0, self.n)]
 
-    def fitness(self, ind: Individual):
+    def fitness(self, ind: Individual, print_sol: bool = False):
         fitness = 0
         total_weight = 0
         for i in range(self.n):
