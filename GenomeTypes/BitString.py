@@ -14,7 +14,7 @@ class BitString(Genome):
         Generates random bit string of the given length.
         :param length: Length of the bit string. Needs to be a positive integer.
         :param max_co: Amount of crossover points. Needs to be a positive integer lower than or equal to length.
-        If it's not, then it will be length - 1
+        If it's not, then it will be length - 1. This is the default value
         """
         assert 0 < length
         super().__init__(gen_rep)
