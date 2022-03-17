@@ -1,4 +1,3 @@
-from Individual import Individual
 from Selection.SelectionType import SelectionType
 
 
@@ -15,10 +14,10 @@ class Selection:
         """
         self.sel_type = sel_type
 
-    def select(self, pop) -> Individual:
+    def select(self, pop):
         """
-        Selects an individual, possibly based on their fitness.
+        Selects a list of individuals with the same length as pop, possibly based on their fitness.
         :param pop: The population where individuals can be picked from.
-        :return: A selected individual
+        :return: A list of selected individuals
         """
         pass

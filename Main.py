@@ -24,6 +24,7 @@ def main_tsp():
     gga = GGA(pop_sz, max_gens, pr_co, pr_mt, base_gen, sel_type, problem)
     best_ind = gga.run()
     # Let the best individual do something. Like running your problem and printing out the solution to your problem
+    print("Best individual:")
     print(best_ind)
     # Printing the solution
     problem.fitness(best_ind, True)

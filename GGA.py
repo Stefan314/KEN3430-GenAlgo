@@ -79,10 +79,7 @@ class GGA:
             counter += 1
             print("Generation: " + str(counter))
             # Fill mating pool
-            mating_pool = []
-            while len(mating_pool) != len(population):
-                ind = self.sel_type.select(population)
-                mating_pool.append(ind)
+            mating_pool = self.sel_type.select(population)
 
             # Generate new population from mating pool
             population = []
