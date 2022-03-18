@@ -71,13 +71,6 @@ class GGA:
             counter += 1
             print("Generation: " + str(counter))
             # Fill mating pool
-            population = sorted(population, key=lambda individual: individual.fitness, reverse=True)
-            fitness_scores = []
-            for ind in population:
-                if ind.fitness not in fitness_scores:
-                    fitness_scores.append(ind.fitness)
-            print(fitness_scores)
-
             mating_pool = self.sel_type.select(population)
 
             # Generate new population from mating pool

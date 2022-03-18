@@ -14,9 +14,6 @@ class Knapsack(Problem):
         """
         super().__init__(ProblemName.KNAPSACK)
 
-        assert isinstance(genome, BitString)
-        self.n = len(genome)
-
         #self.item_values = [1, 3, 5, 4, 2]
         #self.item_weights = [0.1, 10, 1, 2, 0.5]
 
@@ -44,7 +41,6 @@ class Knapsack(Problem):
                 total_weight += self.item_weights[i]
         if total_weight > self.max_weight:
             fitness = 0
-
 
         ind.fitness = fitness
 

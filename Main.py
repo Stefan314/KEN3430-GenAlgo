@@ -2,9 +2,6 @@ import networkx as nx
 
 from GGA import GGA
 
-from GenomeTypes.BitString import BitString
-from GenomeTypes.IntString import IntString
-
 from Problem.Knapsack import Knapsack
 from Problem.TSP import TSP
 from Selection.RWS import RWS
@@ -57,16 +54,8 @@ def main_knap():
     pr_co = 0.6
     pr_mt = 0.15
 
-    graph = tsp_graph()
-
-
-
     # This should be the longest possible route
-    base_gen = BitString(length=15, max_co=4)
-    problem = Knapsack(base_gen)
-
-
-    problem = Knapsack(5, 4)
+    problem = Knapsack(15, 4)
 
     sel_type = RWS(temp=1.0)
 
@@ -78,4 +67,5 @@ def main_knap():
 
 if __name__ == '__main__':
     # Change to main_knap() or main_tsp() depending on what you want to test
-    main_knap()
+    # main_knap()
+    main_tsp()
