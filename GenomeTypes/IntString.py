@@ -36,9 +36,6 @@ class IntString(Genome):
             if mut:
                 self.string[i] = random.randrange(0, self.max_int)
 
-    def new_genome(self) -> "Genome":
-        return IntString(len(self), self.max_co, self.max_int)
-
     def __len__(self):
         return len(self.string)
 

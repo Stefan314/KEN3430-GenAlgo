@@ -23,3 +23,10 @@ class Problem:
         :return: None
         """
         pass
+
+    def init_population(self, pop_size: int = 100):
+        """
+        Creates a list of genomes based on what is needed for the problem
+        :return: List of genomes
+        """
+        pass
