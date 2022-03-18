@@ -1,6 +1,8 @@
 import random
 
-from Individual import Individual
+import Individual
+from GenomeTypes.BitString import BitString
+from GenomeTypes.Genome import Genome
 from Problem.Problem import Problem
 from Problem.TSP import TSP
 from Selection.RandomSelection import RandomSelection
@@ -20,6 +22,7 @@ class GGA:
                  max_generations: int = 10,
                  prob_co: float = 0.5,
                  prob_mut: float = 0.1,
+                 base_gen: Genome = None,
                  sel_type: Selection = None,
                  problem: Problem = None):
         """
@@ -30,6 +33,7 @@ class GGA:
         where 0 is 0% probability and 1 is 100%.
         :param prob_mut: Mutation probability. Must be a float between 0 (inclusive) and 1 (inclusive),
         where 0 is 0% probability and 1 is 100%
+        :param base_gen: Genotype representation. How the genome is being represented.
         :param sel_type: The selection type. How survival is determined.
         :param problem: The problem. Defines how fitness is calculated for each individual.
         """
@@ -43,6 +47,10 @@ class GGA:
         self.prob_co = prob_co
         self.prob_mut = prob_mut
 
+        if not base_gen:
+            base_gen = BitString()
+        self.base_gen = base_gen
+
         if not sel_type:
             sel_type = RandomSelection()
         self.sel_type = sel_type
@@ -51,14 +59,14 @@ class GGA:
             problem = TSP()
         self.problem = problem
 
-    def run(self) -> Individual:
+    def run(self) -> Individual.Individual:
         """
         Runs the GA to find the best individual
         :return: The individual with the highest fitness
         """
 
         # Initial population construction
-        population = self.problem.init_population(self.pop_size)
+        population = Individual.factory(self.base_gen, self.pop_size)
 
         self.fitness_full_pop(population)
 

@@ -31,6 +31,15 @@ class Genome:
         """
         pass
 
+    def new_genome(self) -> "Genome":
+        """
+        Creates a new genome based on the current genome.
+        It will be similar attribute-wise, but the contents will be different.
+        Should be overwritten by inheriting classes.
+        :return: A new genome based on the current one.
+        """
+        pass
+
     def __len__(self):
         """
         If this class is inherited, and this method is implemented in this subclass than it will return sth useful
