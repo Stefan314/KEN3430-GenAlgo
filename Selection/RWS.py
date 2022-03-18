@@ -20,6 +20,7 @@ class RWS(Selection):
     def select(self, pop):
         max_fitness = sum([c.fitness for c in pop])
         new_pop = []
+        print(max_fitness)
         for i in range(len(pop)):
             required_chance = random.uniform(0, max_fitness)
             current_chance = 0
