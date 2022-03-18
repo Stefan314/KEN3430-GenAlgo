@@ -1,3 +1,5 @@
+import random
+
 import networkx as nx
 
 from GGA import GGA
@@ -14,7 +16,7 @@ def main_tsp():
     max_gens = 100
     pr_co = 0.6
     pr_mt = 0.15
-    graph = tsp_graph()
+    graph = tsp_random_graph()
     problem = TSP(start_node=0, graph=graph)
 
     # This should be the longest possible route
@@ -43,6 +45,22 @@ def tsp_graph():
     graph.add_edge(2, 1, weight=35)
     graph.add_edge(3, 1, weight=25)
     graph.add_edge(2, 3, weight=30)
+
+    return graph
+
+
+def tsp_random_graph():
+    graph = nx.Graph()
+
+    no_of_nodes = random.randint(4, 10)
+
+    for i in range(no_of_nodes):
+        graph.add_node(i)
+
+    for i in range(len(graph.nodes)):
+        for j in range(i + 1, len(graph.nodes)):
+            random_weight = random.uniform(0, 30)
+            graph.add_edge(i, j, weight=random_weight)
 
     return graph
 
