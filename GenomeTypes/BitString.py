@@ -9,15 +9,17 @@ prop_0 = 0.5
 
 class BitString(Genome):
 
-    def __init__(self, length: int = 10, max_co: int = 9):
+    def __init__(self, length: int = 10, max_co: int = -1):
         """
         Generates random bit string of the given length.
         :param length: Length of the bit string. Needs to be a positive integer.
         :param max_co: Amount of crossover points. Needs to be a positive integer lower than or equal to length.
+        If it's not, then it will be length - 1. This is the default value
         """
         assert 0 < length
-        assert 0 < max_co <= length
         super().__init__(gen_rep)
+        if not 0 < max_co <= length:
+            max_co = length - 1
         self.max_co = max_co
         self.string = []
         self.possible_co_pts = []
@@ -34,9 +36,6 @@ class BitString(Genome):
             bit_bool = self.string[i]
             mut = random.random() < prob_mut
             self.string[i] = (bit_bool and not mut) or (not bit_bool and mut)
-
-    def new_genome(self) -> "Genome":
-        return BitString(len(self), self.max_co)
 
     def __len__(self):
         return len(self.string)
