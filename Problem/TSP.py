@@ -1,5 +1,6 @@
 import networkx as nx
 
+from GenomeTypes.IntString import IntString
 from Individual import Individual
 from Problem.Problem import Problem
 from Problem.ProblemName import ProblemName
@@ -7,12 +8,22 @@ from Problem.ProblemName import ProblemName
 
 class TSP(Problem):
 
-    def __init__(self, graph: nx.Graph = None, start_node: int = None):
+    def __init__(self, graph: nx.Graph = None, start_node: int = None, max_co: int = 1):
+        """
+        :param graph: Represents the traveling salesperson problem. Edges have weights.
+        :param start_node: The preferred starting node
+        :param max_co: Maximum of crossover points.
+        Needs to be a positive integer lower than or equal to
+        sum(range(len(no_of_nodes_in_graph))) + len(no_of_nodes_in_graph) - 1
+        """
         super().__init__(ProblemName.TSP)
+        length = sum(range(len(graph.nodes))) + len(graph.nodes) - 1
+        assert 0 < max_co <= length
         self.graph = graph
         if not start_node:
             start_node = 0
         self.start_node = start_node
+        self.max_co = max_co
 
     def fitness(self, ind: Individual, print_sol: bool = False):
         current_node = self.start_node
@@ -62,3 +73,15 @@ class TSP(Problem):
                 print(sol)
             else:
                 print("No solution was found")
+
+    def init_population(self, pop_size: int = 100):
+        pop = []
+        # Maximum amount of edges the traveling salesperson problem can use (I think)
+        max_length = sum(range(len(self.graph.nodes))) + len(self.graph.nodes) - 1
+        max_int = len(self.graph.nodes) - 1
+        for i in range(pop_size):
+            genome = IntString(length=max_length,
+                               max_co=self.max_co,
+                               max_int=max_int)
+            pop.append(Individual(genome))
+        return pop

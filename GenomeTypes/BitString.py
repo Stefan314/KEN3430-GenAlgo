@@ -37,9 +37,6 @@ class BitString(Genome):
             mut = random.random() < prob_mut
             self.string[i] = (bit_bool and not mut) or (not bit_bool and mut)
 
-    def new_genome(self) -> "Genome":
-        return BitString(len(self), self.max_co)
-
     def __len__(self):
         return len(self.string)
 
