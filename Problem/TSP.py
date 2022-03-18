@@ -8,7 +8,7 @@ from Problem.ProblemName import ProblemName
 
 class TSP(Problem):
 
-    def __init__(self, graph: nx.Graph = None, start_node: int = None, max_co: int = 1):
+    def __init__(self, graph: nx.Graph = None, start_node: int = 0, max_co: int = 1):
         """
         :param graph: Represents the traveling salesperson problem. Edges have weights.
         :param start_node: The preferred starting node
@@ -20,8 +20,6 @@ class TSP(Problem):
         length = sum(range(len(graph.nodes))) + len(graph.nodes) - 1
         assert 0 < max_co <= length
         self.graph = graph
-        if not start_node:
-            start_node = 0
         self.start_node = start_node
         self.max_co = max_co
 
